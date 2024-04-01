@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormContext } from "./FormContext";
+import { Navigate } from "react-router-dom";
 
 
 function FormPage (){
@@ -10,14 +11,11 @@ function FormPage (){
         message : '',
         attachment: null
       });
+
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [isConflict, setIsConflict] = useState (false)
     
       const handleChange = (e) => {
-        // const { name } = e.target;
-        // const file = e.target.files ? e.target.files[0] : null;
-        // SetFormData (prevData => ({...prevData, [name] : file }))
-
-        // const { name, value } = e.target;
-        // SetFormData (prevData => ({...prevData, [name] : value }))
 
         const {name, value, files } = e.target;
         if (name === 'attachment') {
@@ -28,14 +26,40 @@ function FormPage (){
       }  
    
     
-      const handleSubmit = (e) => {
-        e.preventDefault ()
-        console.log (formData)
-        addSubmittedForm (formData)
-        window.alert ('Form Submitted Successfully')
-        SetFormData ({name:'', email:'', message:'', attachment: null})
+      // const handleSubmit = (e) => {
+      //   e.preventDefault ()
+      //   console.log (formData)
+      //   addSubmittedForm (formData)
+      //   window.alert ('Form Submitted Successfully')
+      //   SetFormData ({name:'', email:'', message:'', attachment: null})
+      // }
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+          const response = await submitForm (formData)
+          addSubmittedForm(formData)
+          setIsSubmitted(true)
+        }catch (error) {
+          setIsConflict(true)
+        }
       }
 
+      const submitForm = async (formData) => {
+        return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve ({ success: true})
+        },1000)
+      })
+    }
+
+      if (isSubmitted) {
+        return <Navigate to = "/Success" />
+      }
+
+      if (isConflict) {
+        return <Navigate to = "/conflict" />
+      }
       
       return (
               <div className="App">

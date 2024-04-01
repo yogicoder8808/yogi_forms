@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import FormPage from './Forms';
 import SubmittedFormPage from './SubmittedForms';
 import { FormProvider } from './FormContext';
+import SuccessPage from './SuccessPage';
+import ConflictPage from './ConflictPage';
 
 function App() {
   return(
@@ -28,6 +30,8 @@ function App() {
           <Route path='/' element={<Home />}/>
           <Route path='/form' element = { <FormPage />} />
           <Route path='/submitted' element = { <SubmittedFormPage />} />
+          <Route path='/success' element = { <SuccessPage />} />
+          <Route path='/conflict' element = { <ConflictPage />} />
         </Routes>
       </div>
       </FormProvider>
