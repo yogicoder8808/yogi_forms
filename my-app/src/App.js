@@ -36,7 +36,12 @@ function App() {
 }
 
 function Home(){
-    return <h2 style={ {color:'chocolate', padding: 20}}> Home Page</h2>
+    return (
+      <div>
+        <h2 style={ {color:'chocolate', padding: 20}}> Home Page</h2>
+        <h3 style={ {textAlign: 'justify', paddingRight:200 } }> Follow the links to submit the form</h3>
+     </div>
+    )
 }
 
 export default App;

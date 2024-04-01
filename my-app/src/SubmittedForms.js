@@ -13,8 +13,18 @@ return(
                 <p>Name: {form.name}</p>
                 <p>Email: {form.email}</p>
                 <p>Message: {form.message}</p>
+                {form.attachment && (
+                    <div>
+                        <p>Attachment:</p>
+                        {typeof form.attachment === 'string' ? (
+                            <img src = {URL.createObjectURL (form.attachment)} alt = "Attachment" style={ { maxWidth: '100px', maxHeight: '100px'}}/> 
+                            ) : (
+                            <a href = {URL.createObjectURL (form.attachment)} download> Download Attachment</a>
+                            )}
+                    </div> 
+                )}
+                        
             </div>
-
         ))}
     </div>
 )
