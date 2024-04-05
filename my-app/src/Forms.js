@@ -22,8 +22,8 @@ function FormPage (){
           SetFormData (prevData => ({...prevData, [name] : files[0] }))
         } else {
           SetFormData (prevData => ({...prevData, [name] : value }))
-        }
-      }  
+        }  
+      }
    
     
       // const handleSubmit = (e) => {
@@ -34,24 +34,48 @@ function FormPage (){
       //   SetFormData ({name:'', email:'', message:'', attachment: null})
       // }
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-          const response = await submitForm (formData)
-          addSubmittedForm(formData)
+    //   const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     try{
+    //       const response = await submitForm (formData)
+    //       addSubmittedForm(formData)
+    //       setIsSubmitted(true)
+    //     }catch (error) {
+    //       setIsConflict(true)
+    //     }
+    //   }
+
+    //   const submitForm = async (formData) => {
+    //     return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve ({ success: true})
+    //     },1000)
+    //   })
+    // }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      try {
+        const response = await fetch ('/api/submit-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+
+        if (response.ok) {
+          const data = await response.json()
+          addSubmittedForm(data)
           setIsSubmitted(true)
-        }catch (error) {
+        } else {
+          setIsConflict (true)
+        } 
+      }catch (error) {
+          console.error ('Error Submitting form:', error)
           setIsConflict(true)
         }
       }
-
-      const submitForm = async (formData) => {
-        return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve ({ success: true})
-        },1000)
-      })
-    }
 
       if (isSubmitted) {
         return <Navigate to = "/Success" />
