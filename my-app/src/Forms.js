@@ -56,7 +56,7 @@ function FormPage (){
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-        const response = await fetch ('/api/submit-form', {
+        const response = await fetch ('/api/submitted', {
           method: 'POST',
           headers: {
             'Content-Type' : 'application/json'
