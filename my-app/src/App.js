@@ -23,6 +23,12 @@ function App() {
             <li>
               <Link to = "/submitted">Submitted Form</Link>
             </li>
+            <li>
+              <Link to = "/success">Success</Link>
+            </li>
+            <li>
+              <Link to = "/conflict">Conflict</Link>
+            </li>
           </ul>
         </nav>
 
@@ -46,6 +52,8 @@ function Home(){
         <h3 style={ {textAlign: 'justify', paddingRight:200 } }> Follow the links to submit the form</h3>
      </div>
     )
+
+
 }
 
 export default App;
