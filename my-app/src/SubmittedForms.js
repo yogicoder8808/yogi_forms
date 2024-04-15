@@ -12,7 +12,7 @@ function SubmittedFormPage () {
         try{
             const response = await fetch ('http://localhost:4000/forms')
         if (!response.ok) {
-            throw new Error ('Failedto fetch form data')
+            throw new Error ('Failed to fetch form data')
         }
         const data = await response.json();
         setFormDataList(data);
@@ -22,7 +22,7 @@ function SubmittedFormPage () {
 }
 
     return(
-        <div>
+        <div className='form-group1'>
             <h2>Submitted Form</h2>
             <ul>
                 {formDataList.map ((formData, index) => (
@@ -31,6 +31,12 @@ function SubmittedFormPage () {
                         <p>Name: {formData.name}</p>
                         <p>Email: {formData.email}</p>
                         <p>Message: {formData.message}</p>
+                        {formData.attachment && (
+                            <div>
+                                <p>Attachment:</p>
+                                <a href={formData.attachment} download>Download Attachment</a>
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>
